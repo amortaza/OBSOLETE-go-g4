@@ -42,6 +42,16 @@ func Uninit() {
 	g_colorRect.Free()
 }
 
+func PushView(width, height int32) {
+	PushViewport(width, height)
+	PushOrtho(width,height)
+}
+
+func PopView() {
+	PopViewport()
+	PopOrtho()
+}
+
 func PushViewport(width, height int32) {
 	g_viewportWidthStack.Push(width)
 	g_viewportHeightStack.Push(height)

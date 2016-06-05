@@ -1,5 +1,9 @@
 package g4
 
+import "adt"
+
+var g_canvasStack adt.Stack
+
 type Canvas struct {
 	Framebuffer *FrameBuffer
 	Width, Height int32
@@ -18,10 +22,11 @@ func NewCanvas(width, height int32) *Canvas {
 func (c *Canvas) Begin() {
 	c.Framebuffer.Begin()
 
+	g_canvasStack.Push(c.Framebuffer)
+
 	texture := c.Framebuffer.Texture
 
-	PushViewport(texture.Width, texture.Height)
-	PushOrtho(texture.Width, texture.Height)
+	PushView(texture.Width, texture.Height)
 }
 
 func (c *Canvas) Clear(red, green, blue float32) {
@@ -39,10 +44,18 @@ func (c *Canvas) Paint(left, top int32, alphas []float32) {
 }
 
 func (c *Canvas) End() {
-	PopOrtho()
-	PopViewport()
+	PopView()
 
 	c.Framebuffer.End()
+
+	g_canvasStack.Pop()
+
+	if g_canvasStack.Size > 0 {
+
+		frameBuffer := g_canvasStack.Top().(*FrameBuffer)
+
+		frameBuffer.Begin()
+	}
 }
 
 func (c *Canvas) Free() {
