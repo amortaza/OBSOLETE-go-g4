@@ -58,13 +58,11 @@ func (r *TextureRect) Draw(	texture *Texture,
 	texture.Deactivate()
 }
 
-func (r *TextureRect) DrawString( texture *Texture,
-				left int32, top int32,
-				width int32, height int32,
-				rgb []float32,
-				bg []float32,
-				alpha float32,
-				projection *float32 ) {
+func (r *TextureRect) DrawUpsideDown(	texture *Texture,
+					left int32, top int32,
+					width int32, height int32,
+					leftTopRightBottomAlphas []float32,
+					projection *float32 ) {
 
 	r.program.Activate()
 
@@ -72,9 +70,7 @@ func (r *TextureRect) DrawString( texture *Texture,
 
 	gl.Uniform1i(r.program.GetUniformLocation("Sampler"), 0)
 	gl.UniformMatrix4fv(r.program.GetUniformLocation("Projection"), 1, false, projection)
-	gl.Uniform3f(r.program.GetUniformLocation("RGB"), rgb[0],rgb[1],rgb[2]);
-	gl.Uniform3f(r.program.GetUniformLocation("Bg"), bg[0],bg[1],bg[2]);
-	gl.Uniform1f(r.program.GetUniformLocation("Alpha"), alpha);
+	gl.Uniform4f(r.program.GetUniformLocation("Alphas"), leftTopRightBottomAlphas[0], leftTopRightBottomAlphas[1], leftTopRightBottomAlphas[2], leftTopRightBottomAlphas[3]);
 
 	gl.BindVertexArray(r.vao)
 	gl.BindBuffer(gl.ARRAY_BUFFER, r.vbo)
@@ -87,6 +83,45 @@ func (r *TextureRect) DrawString( texture *Texture,
 		float32(right), float32(top), 1.0, 1.0 ,
 		float32(right), float32(bottom), 1.0, 0.0,
 		float32(left), float32(bottom), 0.0, 0.0 }
+
+	setVertexData2(vertices)
+
+	gl.DrawArrays(gl.TRIANGLE_FAN, 0, 4)
+
+	gl.BindVertexArray(0)
+
+	texture.Deactivate()
+}
+
+func (r *TextureRect) DrawString( texture *Texture,
+				left int32, top int32,
+				width int32, height int32,
+				rgbFg []float32,
+				rgbBg []float32,
+				alpha float32,
+				projection *float32 ) {
+
+	r.program.Activate()
+
+	texture.Activate(gl.TEXTURE0)
+
+	gl.Uniform1i(r.program.GetUniformLocation("Sampler"), 0)
+	gl.UniformMatrix4fv(r.program.GetUniformLocation("Projection"), 1, false, projection)
+	gl.Uniform3f(r.program.GetUniformLocation("RGB"), rgbFg[0], rgbFg[1], rgbFg[2]);
+	gl.Uniform3f(r.program.GetUniformLocation("Bg"), rgbBg[0], rgbBg[1], rgbBg[2]);
+	gl.Uniform1f(r.program.GetUniformLocation("Alpha"), alpha);
+
+	gl.BindVertexArray(r.vao)
+	gl.BindBuffer(gl.ARRAY_BUFFER, r.vbo)
+
+	right := left + width
+	bottom := top + height
+
+	vertices := []float32{
+		float32(left), float32(top), 0.0, 0.0,
+		float32(right), float32(top), 1.0, 0.0 ,
+		float32(right), float32(bottom), 1.0, 1.0,
+		float32(left), float32(bottom), 0.0, 1.0 }
 
 	setVertexData2(vertices)
 

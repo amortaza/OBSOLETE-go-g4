@@ -11,7 +11,7 @@ type StringTexture struct {
 	Texture *Texture
 }
 
-func NewFontTexture(str string, aceFont *G4Font) *StringTexture {
+func NewStringTexture(str string, aceFont *G4Font) *StringTexture {
 	width := aceFont.Width(str)
 	height := aceFont.Height
 	descent := aceFont.Descent

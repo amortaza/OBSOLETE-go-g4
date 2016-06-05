@@ -35,7 +35,7 @@ func (c *Canvas) Paint(left, top int32, alphas []float32) {
 		alphas = opaque
 	}
 
-	DrawTextureRect(c.Framebuffer.Texture, left, top, c.Width,c.Height,alphas)
+	DrawTextureRectUpsideDown(c.Framebuffer.Texture, left, top, c.Width,c.Height,alphas)
 }
 
 func (c *Canvas) End() {

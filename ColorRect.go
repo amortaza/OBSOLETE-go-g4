@@ -23,8 +23,8 @@ func NewColorRect() *ColorRect {
 	return r
 }
 
-func (r *ColorRect) Draw(	left int, top int,
-				width int, height int,
+func (r *ColorRect) Draw(	left int32, top int32,
+				width int32, height int32,
 				leftTopColor []float32,
 				rightTopColor []float32,
 				rightBottomColor []float32,
