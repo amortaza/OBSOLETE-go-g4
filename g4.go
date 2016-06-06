@@ -11,6 +11,7 @@ var g_projection mgl32.Mat4
 var g_colorRect *ColorRect
 var g_textureRect *TextureRect
 var g_stringRect *TextureRect
+var g_canvasRect *TextureRect
 
 var g_viewportWidthStack  adt.Stack
 var g_viewportHeightStack adt.Stack
@@ -27,8 +28,9 @@ func Init() {
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
 	g_colorRect = NewColorRect()
-	g_textureRect = NewTextureRect("g4/shader/texture-rect.vertex.txt", "g4/shader/texture-rect.fragment.txt")
+	g_textureRect = NewTextureRect("g4/shader/texture.vertex.txt", "g4/shader/texture.fragment.txt")
 	g_stringRect = NewTextureRect("g4/shader/font.vertex.txt", "g4/shader/font.fragment.txt")
+	g_canvasRect = NewTextureRect("g4/shader/canvas.vertex.txt", "g4/shader/canvas.fragment.txt")
 }
 
 func Clear(red,green,blue,alpha float32) {
@@ -37,6 +39,7 @@ func Clear(red,green,blue,alpha float32) {
 }
 
 func Uninit() {
+	g_canvasRect.Free()
 	g_stringRect.Free()
 	g_textureRect.Free()
 	g_colorRect.Free()

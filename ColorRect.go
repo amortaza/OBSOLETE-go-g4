@@ -15,7 +15,7 @@ type ColorRect struct {
 func NewColorRect() *ColorRect {
 	r := &ColorRect{}
 
-	r.program = ace.NewProgram("g4/shader/rgb-rect.vertex.txt", "g4/shader/rgb-rect.fragment.txt")
+	r.program = ace.NewProgram("g4/shader/rgb.vertex.txt", "g4/shader/rgb.fragment.txt")
 
 	gl.GenVertexArrays(1, &r.vao)
 	gl.GenBuffers(1, &r.vbo)

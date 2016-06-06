@@ -33,14 +33,15 @@ func (c *Canvas) Clear(red, green, blue float32) {
 	ClearRect(c.Width, c.Height, red, green, blue)
 }
 
-var opaque = []float32{1,1,1,1}
+var allOnes = []float32{1,1,1,1}
 
 func (c *Canvas) Paint(left, top int32, alphas []float32) {
 	if alphas == nil {
-		alphas = opaque
+		alphas = allOnes
 	}
 
-	DrawTextureRectUpsideDown(c.Framebuffer.Texture, left, top, c.Width,c.Height,alphas)
+	//DrawTextureRectUpsideDown(c.Framebuffer.Texture, left, top, c.Width,c.Height,alphas)
+	DrawCanvasRect(c, left, top, c.Width,c.Height,alphas)
 }
 
 func (c *Canvas) End() {
