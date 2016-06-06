@@ -13,9 +13,9 @@ func DrawColorRect(	left int32, top int32,
 func DrawTextureRect(	texture *Texture,
 			left int32, top int32,
 			width int32, height int32,
-			rgba []float32,) {
+			alphas []float32,) {
 
-	g_textureRect.Draw(texture, left, top, width, height, rgba, &g_projection[0])
+	g_textureRect.Draw(texture, left, top, width, height, alphas, &g_projection[0])
 }
 
 func DrawTextureRectUpsideDown(	texture *Texture,

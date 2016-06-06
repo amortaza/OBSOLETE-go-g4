@@ -18,6 +18,7 @@ void main() {
 
 	float alpha = leftTop * (1-s) * (1-t) + rightTop * s * ( 1 - t) + leftBottom * (1-s) * t + rightBottom * s * t;
 
+
     FragColor = texture(Sampler, TexCoord.st) * vec4(1,1,1,alpha);
 }
 
