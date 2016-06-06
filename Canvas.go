@@ -35,13 +35,16 @@ func (c *Canvas) Clear(red, green, blue float32) {
 
 var allOnes = []float32{1,1,1,1}
 
-func (c *Canvas) Paint(left, top int32, alphas []float32) {
+func (c *Canvas) Paint(seeThru bool, left, top int32, alphas []float32) {
 	if alphas == nil {
 		alphas = allOnes
 	}
 
-	//DrawTextureRectUpsideDown(c.Framebuffer.Texture, left, top, c.Width,c.Height,alphas)
-	DrawCanvasRect(c, left, top, c.Width,c.Height,alphas)
+	if seeThru {
+		DrawTextureRectUpsideDown(c.Framebuffer.Texture, left, top, c.Width, c.Height, alphas)
+	} else {
+		DrawCanvasRect(c, left, top, c.Width, c.Height, alphas)
+	}
 }
 
 func (c *Canvas) End() {
