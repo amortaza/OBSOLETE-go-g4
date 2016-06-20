@@ -15,6 +15,7 @@ type G4Font struct {
 }
 
 func LoadTrueTypeFromFile(fontFilename string) *truetype.Font {
+	fmt.Println("Reading font file ", fontFilename)
 	fontBytes, _ := ioutil.ReadFile(fontFilename)
 
 	f, _ := truetype.Parse(fontBytes)
