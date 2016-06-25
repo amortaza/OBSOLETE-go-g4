@@ -3,25 +3,15 @@ package g4
 import (
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/go-gl/gl/v3.3-core/gl"
-	"adt"
 )
-
-var g_projection mgl32.Mat4
-
-var g_colorRect *ColorRect
-var g_textureRect *TextureRect
-var g_stringRect *TextureRect
-var g_canvasRect *TextureRect
-
-var g_viewportWidthStack  adt.Stack
-var g_viewportHeightStack adt.Stack
-var g_orthoStack adt.Stack
 
 func Init() {
 	gl.ClearColor(0.1, 0.4, 0.4, 1.0)
 
 	gl.Disable(gl.DEPTH_TEST)
 	gl.Disable(gl.CULL_FACE)
+
+	gl.Enable(gl.FRAMEBUFFER_SRGB);
 
 	// blending is required to be able to render text
 	gl.Enable(gl.BLEND)

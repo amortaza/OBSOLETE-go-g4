@@ -29,7 +29,7 @@ func NewG4Font(f *truetype.Font, fontSize int32) *G4Font {
 	face := truetype.NewFace(f, &truetype.Options{
 		Size:    float64(fontSize),
 		DPI:     196.0,
-		Hinting: font.HintingFull })
+		Hinting: font.HintingNone })
 
 	metrics := face.Metrics()
 
