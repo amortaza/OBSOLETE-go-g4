@@ -1,7 +1,7 @@
 package g4
 
 import "github.com/amortaza/go-adt"
-
+ 
 var g_canvasStack adt.Stack
 
 type Canvas struct {
