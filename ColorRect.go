@@ -15,11 +15,7 @@ type ColorRect struct {
 func NewColorRect() *ColorRect {
 	r := &ColorRect{}
 
-<<<<<<< HEAD
 	r.program = ace.NewProgram("github.com/amortaza/go-g4/shader/rgb.vertex.txt", "github.com/amortaza/go-g4/shader/rgb.fragment.txt")
-=======
-	r.program = ace.NewProgram("g4/shader/rgb.vertex.txt", "g4/shader/rgb.fragment.txt")
->>>>>>> c45cd4e928cf06c590227c7db307ba48747ab521
 
 	gl.GenVertexArrays(1, &r.vao)
 	gl.GenBuffers(1, &r.vbo)
