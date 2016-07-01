@@ -24,8 +24,7 @@ func NewTextureRect(vertexShaderFilename, fragmentShaderFilename string) *Textur
 }
 
 func (r *TextureRect) Draw(	texture *Texture,
-				left int32, top int32,
-				width int32, height int32,
+				left, top, width, height int,
 				leftTopRightBottomAlphas []float32,
 				projection *float32 ) {
 
@@ -59,8 +58,7 @@ func (r *TextureRect) Draw(	texture *Texture,
 }
 
 func (r *TextureRect) DrawUpsideDown(	texture *Texture,
-					left int32, top int32,
-					width int32, height int32,
+					left, top, width, height int,
 					leftTopRightBottomAlphas []float32,
 					projection *float32 ) {
 
@@ -94,8 +92,7 @@ func (r *TextureRect) DrawUpsideDown(	texture *Texture,
 }
 
 func (r *TextureRect) DrawString( texture *Texture,
-				left int32, top int32,
-				width int32, height int32,
+				left, top, width, height int,
 				rgbFg []float32,
 				rgbBg []float32,
 				alpha float32,

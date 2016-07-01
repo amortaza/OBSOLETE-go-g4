@@ -10,7 +10,7 @@ type FrameBuffer struct {
 	FramebufferId uint32
 }
 
-func NewFrameBuffer(width, height int32) *FrameBuffer {
+func NewFrameBuffer(width, height int) *FrameBuffer {
 	f := &FrameBuffer{}
 
 	f.Texture = NewTexture()

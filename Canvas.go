@@ -6,10 +6,10 @@ var g_canvasStack adt.Stack
 
 type Canvas struct {
 	Framebuffer *FrameBuffer
-	Width, Height int32
+	Width, Height int
 }
 
-func NewCanvas(width, height int32) *Canvas {
+func NewCanvas(width, height int) *Canvas {
 	canvas := &Canvas{}
 
 	canvas.Framebuffer = NewFrameBuffer(width, height)
@@ -35,7 +35,7 @@ func (c *Canvas) Clear(red, green, blue float32) {
 
 var allOnes = []float32{1,1,1,1}
 
-func (c *Canvas) Paint(seeThru bool, left, top int32, alphas []float32) {
+func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
 	if alphas == nil {
 		alphas = allOnes
 	}

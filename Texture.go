@@ -13,7 +13,7 @@ import (
 type Texture struct {
 	TextureId     uint32
 
-	Width, Height int32
+	Width, Height int
 
 	textureUnit   uint32
 }
@@ -36,8 +36,8 @@ func (t *Texture) LoadImage(filename string) {
 		panic("wrong stride")
 	}
 
-	t.Width  = int32(rgba.Rect.Size().X)
-	t.Height = int32(rgba.Rect.Size().Y)
+	t.Width  = rgba.Rect.Size().X
+	t.Height = rgba.Rect.Size().Y
 
 	dataPtr := gl.Ptr(rgba.Pix)
 
@@ -48,12 +48,12 @@ func (t *Texture) LoadImage(filename string) {
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
-	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.SRGB_ALPHA, t.Width, t.Height, 0, gl.RGBA, gl.UNSIGNED_BYTE, dataPtr)
+	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.SRGB_ALPHA, int32(t.Width), int32(t.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, dataPtr)
 
 	t.Deactivate()
 }
 
-func (t *Texture) LoadBytes_RGBA(width, height int32, bytes []uint8) {
+func (t *Texture) LoadBytes_RGBA(width, height int, bytes []uint8) {
 
 	t.Width  = width
 	t.Height = height
@@ -67,12 +67,12 @@ func (t *Texture) LoadBytes_RGBA(width, height int32, bytes []uint8) {
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
-	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.SRGB_ALPHA, t.Width, t.Height, 0, gl.RGBA, gl.UNSIGNED_BYTE, dataPtr)
+	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.SRGB_ALPHA, int32(t.Width), int32(t.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, dataPtr)
 
 	t.Deactivate()
 }
 
-func (t *Texture) Allocate(width, height int32) {
+func (t *Texture) Allocate(width, height int) {
 
 	t.Width  = width
 	t.Height = height
@@ -84,7 +84,7 @@ func (t *Texture) Allocate(width, height int32) {
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
-	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.SRGB_ALPHA, t.Width, t.Height, 0, gl.RGBA, gl.UNSIGNED_BYTE, unsafe.Pointer(nil))
+	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.SRGB_ALPHA, int32(t.Width), int32(t.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, unsafe.Pointer(nil))
 
 	t.Deactivate()
 }

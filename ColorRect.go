@@ -23,8 +23,7 @@ func NewColorRect() *ColorRect {
 	return r
 }
 
-func (r *ColorRect) Draw(	left int32, top int32,
-				width int32, height int32,
+func (r *ColorRect) Draw(	left, top, width, height int,
 				leftTopColor []float32,
 				rightTopColor []float32,
 				rightBottomColor []float32,
@@ -54,8 +53,7 @@ func (r *ColorRect) Draw(	left int32, top int32,
 	gl.BindVertexArray(0)
 }
 
-func (r *ColorRect) DrawSolid(	left int32, top int32,
-				width int32, height int32,
+func (r *ColorRect) DrawSolid(	left, top, width, height int,
 				red, green, blue float32,
 				projection *float32 ) {
 

@@ -35,7 +35,7 @@ func Uninit() {
 	g_colorRect.Free()
 }
 
-func PushView(width, height int32) {
+func PushView(width, height int) {
 	PushViewport(width, height)
 	PushOrtho(width,height)
 }
@@ -45,11 +45,11 @@ func PopView() {
 	PopOrtho()
 }
 
-func PushViewport(width, height int32) {
+func PushViewport(width, height int) {
 	g_viewportWidthStack.Push(width)
 	g_viewportHeightStack.Push(height)
 
-	gl.Viewport(0, 0, width, height);
+	gl.Viewport(0, 0, int32(width), int32(height));
 }
 
 func PopViewport() {
@@ -57,14 +57,14 @@ func PopViewport() {
 	g_viewportHeightStack.Pop()
 
 	if g_viewportWidthStack.Size != 0 {
-		width, _ := g_viewportWidthStack.Top().(int32)
-		height, _ := g_viewportHeightStack.Top().(int32)
+		width, _ := g_viewportWidthStack.Top().(int)
+		height, _ := g_viewportHeightStack.Top().(int)
 
-		gl.Viewport(0, 0, width, height);
+		gl.Viewport(0, 0, int32(width), int32(height));
 	}
 }
 
-func PushOrtho(width, height int32) {
+func PushOrtho(width, height int) {
 	g_projection = mgl32.Ortho2D(0, float32(width), float32(height), 0)
 	g_orthoStack.Push(g_projection)
 }

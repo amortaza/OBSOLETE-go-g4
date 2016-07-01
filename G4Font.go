@@ -9,9 +9,9 @@ import (
 
 type G4Font struct {
 	Face *font.Face
-	Height int32
-	Ascent int32
-	Descent int32
+	Height int
+	Ascent int
+	Descent int
 }
 
 func LoadTrueTypeFromFile(fontFilename string) *truetype.Font {
@@ -23,7 +23,7 @@ func LoadTrueTypeFromFile(fontFilename string) *truetype.Font {
 	return f
 }
 
-func NewG4Font(f *truetype.Font, fontSize int32) *G4Font {
+func NewG4Font(f *truetype.Font, fontSize int) *G4Font {
 	g4font := &G4Font{}
 
 	face := truetype.NewFace(f, &truetype.Options{
@@ -33,16 +33,16 @@ func NewG4Font(f *truetype.Font, fontSize int32) *G4Font {
 
 	metrics := face.Metrics()
 
-	g4font.Height = int32(metrics.Height.Ceil())
-	g4font.Descent = int32(metrics.Descent.Ceil())
-	g4font.Ascent = int32(metrics.Ascent.Ceil())
+	g4font.Height = metrics.Height.Ceil()
+	g4font.Descent = metrics.Descent.Ceil()
+	g4font.Ascent = metrics.Ascent.Ceil()
 	g4font.Face = &face
 
 	return g4font
 }
 
-func (f *G4Font) Width(str string) int32 {
-	return int32(font.MeasureString(*f.Face, str)>>6)
+func (f *G4Font) Width(str string) int {
+	return int(font.MeasureString(*f.Face, str)>>6)
 }
 
 func (f *G4Font) Free() {
